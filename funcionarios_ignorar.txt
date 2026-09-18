@@ -1,0 +1,9 @@
+# Funcionários ignorados na geração do funcionarios_api.csv
+# Formato: CPF;NOME
+# - CPF pode ir com ou sem máscara (091.777.562-74 ou 09177756274)
+# - O filtro usa o CPF; o nome é só referência
+# - Linhas em branco e linhas começando com # são ignoradas
+# - Para ignorar novos, basta adicionar uma linha no mesmo formato
+#
+# Exemplo:
+# 091.777.562-74;ADRIANA SILVA DA SILVA

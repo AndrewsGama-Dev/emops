@@ -1,0 +1,53 @@
+# Copie este arquivo para .config e preencha as credenciais reais.
+# NUNCA commite o .config com tokens/senhas.
+
+[APISOURCE]
+token = "COLE_AQUI_O_JWT_DA_ECONTADOR"
+
+[FILTROS]
+# IDs eContador (mesmo numero do ifPonto): 9=Emops, 10=Efire, 11=Econtrol.
+codigo_empresa = 9,10,11
+# IDs de departamento que nao importam (nem o departamento nem os funcionarios).
+# 940=MAPA AP, 973=MAPA RORAIMA. Vazio = nenhum.
+departamentos_ignorar = 940,973
+# true = usa demissoes_matricula_processados.txt (nao reenvia)
+historico_demissoes = true
+
+[MODULOS]
+# true = executa | false = pula (usado pelo main.py / integrador.sh)
+empresas = false
+departamentos = true
+cargos = true
+funcionarios = true
+afastamentos = true
+demissoes = true
+
+[AFASTAMENTOS]
+# Codigos ifPonto por tipo (descricao eContador -> ID-AFASTAMENTO)
+codigo_padrao = 1022
+ferias = 1011
+atestado = 1012
+beneficio = 1013
+licenca_remunerada = 1014
+salario_maternidade = 1015
+sat = 1016
+suspensao_contrato = 1017
+licenca_sem_remuneracao = 1018
+aposentadoria_invalidez = 1019
+servico_militar = 1020
+licenca_paternidade = 1021
+atestado_acidente_trabalho = 1016
+outros = 1022
+
+[APITARGET]
+url = https://stou.ifractal.com.br/emops/rest/
+integracao = gotech
+token_base = COLE_AQUI_O_TOKEN_BASE_IFRACTAL
+campo_chave = cpf
+
+[SOAP]
+# Legado. O fluxo padrao de demissao hoje e REST, nao SOAP.
+url = https://awstou.ifractal.com.br/ws_ifPonto.php
+client_id = gotech
+usuario = gotech
+senha = COLE_AQUI_A_SENHA_SOAP

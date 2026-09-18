@@ -1,0 +1,29 @@
+# Credenciais — nunca commitar
+.config
+.config.bak
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Saídas locais e arquivos gerados
+*_api.csv
+empresas_acessiveis.csv
+departamentos_ativos.csv
+*_dados_detalhados.json
+analise_*.json
+*Copia*
+*copy*
+*.xlsx
+logs_demissao/
+relatorio_*.json
+relatorio_*.csv
+relatorio_integracao_*.json
+erros_*.json
+integrador.log
+demissoes_matricula_processados.txt
+.DS_Store
+Thumbs.db
