@@ -25,5 +25,8 @@ relatorio_integracao_*.json
 erros_*.json
 integrador.log
 demissoes_matricula_processados.txt
+_deploy_vps.py
+_check_vps.py
+_send_config.py
 .DS_Store
 Thumbs.db

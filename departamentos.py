@@ -108,7 +108,7 @@ def enviar_csv_para_api_target(nome_arquivo_csv):
                 data=data, 
                 files=files,
                 headers=headers,
-                timeout=30
+                timeout=120
             )
         
         print(f"📊 Status da resposta: {response.status_code}")
@@ -334,15 +334,21 @@ def gerar_csv_departamentos():
         
         # Salvar dados detalhados dos departamentos
         dados_detalhados = {
-            'departamentos_extraidos': departamentos_dict,
+            'departamentos_extraidos': {
+                f"{k[0]}|{k[1]}" if isinstance(k, tuple) else str(k): v
+                for k, v in departamentos_dict.items()
+            },
             'total_departamentos': len(departamentos_csv),
             'departamentos_com_empresa': departamentos_com_empresa,
             'timestamp': datetime.now().isoformat()
         }
         
-        with open('departamentos_dados_detalhados.json', 'w', encoding='utf-8') as f:
-            json.dump(dados_detalhados, f, indent=2, ensure_ascii=False)
-        print(f"💾 Dados detalhados salvos em 'departamentos_dados_detalhados.json'")
+        try:
+            with open('departamentos_dados_detalhados.json', 'w', encoding='utf-8') as f:
+                json.dump(dados_detalhados, f, indent=2, ensure_ascii=False)
+            print(f"💾 Dados detalhados salvos em 'departamentos_dados_detalhados.json'")
+        except Exception as e:
+            print(f"⚠️  Nao foi possivel salvar JSON detalhado: {e}")
         
         # Verificar campos com dados
         print(f"\n🔍 ANÁLISE DE PREENCHIMENTO DOS CAMPOS:")

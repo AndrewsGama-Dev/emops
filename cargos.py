@@ -109,7 +109,7 @@ def enviar_csv_para_api_target(nome_arquivo_csv):
                 data=data, 
                 files=files,
                 headers=headers,
-                timeout=30
+                timeout=120
             )
         
         print(f"📊 Status da resposta: {response.status_code}")
@@ -349,15 +349,21 @@ def gerar_csv_cargos():
         
         # Salvar dados detalhados das funções
         dados_detalhados = {
-            'funcoes_extraidas': funcoes_dict,
+            'funcoes_extraidas': {
+                f"{k[0]}|{k[1]}" if isinstance(k, tuple) else str(k): v
+                for k, v in funcoes_dict.items()
+            },
             'empresa_padrao_id': id_empresa_padrao,
             'total_cargos': len(cargos_csv),
             'timestamp': datetime.now().isoformat()
         }
         
-        with open('cargos_dados_detalhados.json', 'w', encoding='utf-8') as f:
-            json.dump(dados_detalhados, f, indent=2, ensure_ascii=False)
-        print(f"💾 Dados detalhados salvos em 'cargos_dados_detalhados.json'")
+        try:
+            with open('cargos_dados_detalhados.json', 'w', encoding='utf-8') as f:
+                json.dump(dados_detalhados, f, indent=2, ensure_ascii=False)
+            print(f"💾 Dados detalhados salvos em 'cargos_dados_detalhados.json'")
+        except Exception as e:
+            print(f"⚠️  Nao foi possivel salvar JSON detalhado: {e}")
         
         # Verificar campos com dados
         print(f"\n🔍 ANÁLISE DE PREENCHIMENTO DOS CAMPOS:")
